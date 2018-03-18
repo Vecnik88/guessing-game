@@ -5,30 +5,30 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-    println!("Угадайте число!");
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+	println!("Угадайте число!");
+	let secret_number = rand::thread_rng().gen_range(1, 101);
 
-    loop {
-	    println!("Введите ваше предположение");
+	loop {
+		println!("Введите ваше предположение");
 
-	    let mut guess = String::new();
-	    io::stdin().read_line(&mut guess)
-	        .expect("Не удалось прочитать строку");
+		let mut guess = String::new();
+		io::stdin().read_line(&mut guess)
+			.expect("Не удалось прочитать строку");
 
-	    let guess: u32 = match guess.trim().parse() {
-	        Ok(num) => num,
-	        Err(_) => continue,
-	    };
+		let guess: u32 = match guess.trim().parse() {
+			Ok(num) => num,
+			Err(_) => continue,
+		};
 
-	    println!("Ваша попытка: {}", guess);
+		println!("Ваша попытка: {}", guess);
 
-	    match guess.cmp(&secret_number) {
-	    	Ordering::Less    => println!("Слишком маленькое!"),
-	    	Ordering::Greater => println!("Слишком большое!"),
-	    	Ordering::Equal   => {
-	    		println!("Вы выйграли");
-                break;
-	    	}
-	    }
-    }
+		match guess.cmp(&secret_number) {
+			Ordering::Less    => println!("Слишком маленькое!"),
+			Ordering::Greater => println!("Слишком большое!"),
+			Ordering::Equal   => {
+				println!("Вы выйграли");
+				break;
+			}
+		}
+	}
 }
